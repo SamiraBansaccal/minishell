@@ -6,7 +6,7 @@
 #    By: sabansac <sabansac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/29 17:49:57 by sabansac          #+#    #+#              #
-#    Updated: 2024/12/04 05:18:28 by sabansac         ###   ########.fr        #
+#    Updated: 2024/12/15 19:10:00 by sabansac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,6 @@ SRC_FILES	:= main.c \
 				builtins/builtins.c builtins/ft_cd.c builtins/ft_echo.c \
 				builtins/ft_env.c builtins/ft_exit.c builtins/ft_export.c \
 				builtins/ft_pwd.c builtins/ft_unset.c \
-				../tests/exec_tester.c ../tests/parsing_tester.c \
 
 SRC			:= $(addprefix $(SRCDIR), $(SRC_FILES))
 OBJ			:= $(SRC:$(SRCDIR)%.c=$(OBJDIR)%.o)

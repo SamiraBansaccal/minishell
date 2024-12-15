@@ -6,7 +6,7 @@
 /*   By: sabansac <sabansac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 16:14:32 by sbansacc          #+#    #+#             */
-/*   Updated: 2024/12/04 04:57:07 by sabansac         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:03:28 by sabansac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,28 +23,37 @@ void	write_args(char **args, int i, int fd_outfile)
 	}
 }
 
+int	check_flag_n(char **args, int *newline)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	while (ft_strncmp(args[i], "-n", 2) == 0)
+	{
+		j = 1;
+		while (args[i][j] && args[i][j] == 'n')
+			j++;
+		if (args[i][j])
+			break ;
+		*newline = 0;
+		i++;
+	}
+	return (i);
+}
+
 int	ft_echo(char **args, int fd_outfile)
 {
 	int	newline;
 	int	i;
-	int	j;
 
 	if (fd_outfile == UNSET)
 		fd_outfile = 1;
 	newline = 1;
 	i = 1;
-	j = 1;
 	if (args[i])
 	{
-		while (ft_strncmp(args[i], "-n", 2) == 0)
-		{
-			while (args[i][j] && args[i][j] == 'n')
-				j++;
-			if (args[i][j])
-				break ;
-			newline = 0;
-			i++;
-		}
+		i = check_flag_n(args, &newline);
 		write_args(args, i, fd_outfile);
 	}
 	if (newline)

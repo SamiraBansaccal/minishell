@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_is_valid_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbansacc <sbansacc@student.s19.be>         +#+  +:+       +#+        */
+/*   By: sabansac <sabansac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 04:56:49 by sbansacc          #+#    #+#             */
-/*   Updated: 2024/11/24 06:31:48 by sbansacc         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:00:49 by sabansac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+int	process_infile(char *infile, char *lim, t_pipeline *pipeline)
+{
+	if (ft_strncmp(infile, "here_doc", 9) == 0)
+	{
+		if (!here_doc(lim, pipeline))
+			return (0);
+	}
+	else
+	{
+		pipeline->pipe_in[READ] = open(infile, O_RDONLY);
+		if (pipeline->pipe_in[READ] == UNSET)
+			return (handle_system_error(infile, NULL, 2));
+	}
+	return (1);
+}
 
 char	*get_cmd_path(char *cmd, char **paths)
 {

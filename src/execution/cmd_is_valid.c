@@ -6,7 +6,7 @@
 /*   By: sabansac <sabansac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 22:14:35 by sbansacc          #+#    #+#             */
-/*   Updated: 2024/12/04 23:45:00 by sabansac         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:00:59 by sabansac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,8 @@ int	infile_is_valid(t_command *cmd, t_pipeline *pipeline)
 		pipeline->pipe_in[READ] = UNSET;
 		while (cmd->infile[i])
 		{
-			if (ft_strncmp(cmd->infile[i], "here_doc", 9) == 0)
-			{
-				if (!here_doc(cmd->lim, pipeline))
-					return (0);
-			}
-			else
-			{
-				pipeline->pipe_in[READ] = open(cmd->infile[i], O_RDONLY);
-				if (pipeline->pipe_in[READ] == UNSET)
-					return (handle_system_error(cmd->infile[i], NULL, 2));
-			}
+			if (!process_infile(cmd->infile[i], cmd->lim, pipeline))
+				return (0);
 			i++;
 			if (cmd->infile[i])
 				close(pipeline->pipe_in[READ]);

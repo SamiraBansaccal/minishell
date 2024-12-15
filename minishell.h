@@ -6,7 +6,7 @@
 /*   By: sabansac <sabansac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 21:29:10 by sbansacc          #+#    #+#             */
-/*   Updated: 2024/12/04 05:19:15 by sabansac         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:10:14 by sabansac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ int			outfile_is_valid(t_command *cmd, t_pipeline *pipeline);
 int			cmd_is_valid(t_command *cmd, t_pipeline	*pipeline, t_shell *shell);
 
 /* cmd_is_valid_utils.c */
+int			process_infile(char *infile, char *lim, t_pipeline *pipeline);
 char		*get_cmd_path(char *cmd, char **paths);
 char		*check_access(char *cmd, t_env *env);
 int			redirect_pipe_out(t_command *cmd, t_pipeline *pipeline, char *path);
@@ -215,16 +216,5 @@ int			ft_pwd(int fd_outfile);
 /* ft_unset.c */
 int			ft_unset(t_command *cmd, t_shell *shell);
 int			update_envp(t_shell *shell);
-
-/* ------------------------------TESTERS-------------------------------- */
-
-/* exec_tester.c */
-void		print_pipeline(t_pipeline *pipeline);
-
-/* parser_tester.c */
-void		print_tokens(t_token *tokens);
-void		print_command(t_command *cmd);
-void		print_command_list(t_command *cmd);
-int			print_env(t_shell *shell);
 
 #endif
